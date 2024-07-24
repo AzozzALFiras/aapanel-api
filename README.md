@@ -8,8 +8,9 @@ Install the library using Composer:
 
 ```bash
 composer require azozzalfiras/aapanel-api
+```
 
-## Usage
+### Usage
 
 Initialize the Client
 
@@ -18,7 +19,8 @@ require_once 'vendor/autoload.php';
 
 use aaPanelApiClient;
 
-$apiKey = 'your_api_key';
+$apiKey = 'your_api_key'; // get the api key from the settings aapanle
 $baseUrl = 'https://example.com:8888'; // Replace with your aaPanel API base URL
 $client = new aaPanelApiClient($apiKey, $baseUrl);
+```
 
