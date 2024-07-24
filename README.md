@@ -2,6 +2,12 @@
 
 A PHP client library for interacting with the aaPanel API.
 
+
+## Features for aaPanel API client
+1.
+2.
+3.
+
 ## Installation
 
 Install the library using Composer:
