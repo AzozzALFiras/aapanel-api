@@ -3,10 +3,27 @@
 A PHP client library for interacting with the aaPanel API.
 
 
-## Features for aaPanel API client
-1.
-2.
-3.
+# Features
+- Fetch logs from the API.
+- Add a new site.
+- Add a subdomain.
+- Delete a subdomain.
+- Fetch list of FTP accounts.
+- Add a new FTP account.
+- Delete an FTP account.
+- Import SQL file into a database.
+- Save file content to a specified path.
+- Unzip a ZIP archive to a specified destination.
+- Apply SSL certificate to a domain.
+- Renew SSL certificate for a domain.
+- Get SSL details for a domain and return the 'index' value.
+- Enable HTTPS redirection for a site.
+- Disable a site.
+- Enable a site.
+- Retrieve details of a specific FTP account.
+- Set server configuration parameters.
+- Get server configuration parameters.
+
 
 ## Installation
 
