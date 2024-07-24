@@ -24,3 +24,12 @@ $baseUrl = 'https://example.com:8888'; // Replace with your aaPanel API base URL
 $client = new aaPanelApiClient($apiKey, $baseUrl);
 ```
 
+
+### Functionality
+
+## Fetch Logs
+# Fetches logs from the API.
+```php
+$logs = $client->fetchLogs();
+var_dump($logs);
+```
