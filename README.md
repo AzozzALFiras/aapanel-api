@@ -25,10 +25,10 @@ $client = new aaPanelApiClient($apiKey, $baseUrl);
 ```
 
 
-### Functionality
-
+# Functionality
 ## Fetch Logs
-# Fetches logs from the API.
+### Fetches logs from the API.
+
 ```php
 $logs = $client->fetchLogs();
 var_dump($logs);
