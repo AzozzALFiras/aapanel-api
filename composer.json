@@ -1,22 +1,27 @@
 {
-     "name": "azozzalfiras/aapanel-api",
-     "description": "A PHP client library for interacting with the aapanel API",
+    "name": "azozzalfiras/aapanel-api",
+    "description": "A PHP client library for interacting with the aapanel API",
     "require": {
-        "azozzalfiras/aapanel-api": "^1.0"
+        "php": "^7.4|^8.3"  // Assuming PHP 7.4 or higher is required
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0"  // PHPUnit for testing purposes
+    },
+    "authors": [
+        {
+            "name": "Azozz ALFiras",
+            "email": "azozzalfiras@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AzozzALFiras\\AAPanelAPI\\": "src/"
+        }
     },
     "repositories": [
         {
             "type": "vcs",
             "url": "https://github.com/AzozzALFiras/aapanel-api"
-        } 
-    ],
-    "authors": [
-        {
-            "name": "Azozz ALFiras",
-            "email": "azozzalfiras@gmail.com"
         }
     ]
 }
