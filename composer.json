@@ -2,10 +2,10 @@
     "name": "azozzalfiras/aapanel-api",
     "description": "A PHP client library for interacting with the aapanel API",
     "require": {
-        "php": "^7.4|^8.3"  // Assuming PHP 7.4 or higher is required
+        "php": "^7.4|^8.3" 
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"  // PHPUnit for testing purposes
+        "phpunit/phpunit": "^8.0" 
     },
     "authors": [
         {
