@@ -325,13 +325,10 @@ class aaPanelApiClient
      *
      * @param string $domain Domain name
      * @param int $domainId Domain ID
-     * @param string $privateKey Private key for SSL
-     * @param string $certificate Certificate for SSL
-     * @param string $rootCertificate Root certificate for SSL
      * @param int $autoWildcard Automatically apply wildcard SSL (0 or 1)
      * @return array Response from the API
      */
-    public function applySslCertificate($domain, $domainId, $privateKey, $certificate, $rootCertificate, $autoWildcard = 0)
+    public function applySslCertificate($domain, $domainId, $autoWildcard = 0)
     {
         $applyCertUrl = $this->baseUrl . '/acme?action=apply_cert_api';
         $setSslUrl = $this->baseUrl . '/site?action=SetSSL';
@@ -345,14 +342,14 @@ class aaPanelApiClient
         $applyCertData['auto_wildcard'] = $autoWildcard;
 
         $applyCertResult = $this->httpPostWithCookie($applyCertUrl, $applyCertData);
-        $applyCertResultArray = json_decode($applyCertResult, true);
+        $result = json_decode($applyCertResult, true);
 
         // Set SSL
         $setSslData = $this->generateRequestData();
         $setSslData['type'] = '1';
         $setSslData['siteName'] = $domain;
-        $setSslData['key'] = $privateKey;
-        $setSslData['csr'] = $certificate . ' ' . $rootCertificate;
+        $setSslData['key'] = $result['private_key'];
+        $setSslData['csr'] = $result['cert'] . ' ' . $result['root'];
 
         $setSslResult = $this->httpPostWithCookie($setSslUrl, $setSslData);
 
