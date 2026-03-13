@@ -1,16 +1,31 @@
 {
     "name": "azozzalfiras/aapanel-api",
-    "description": "A PHP client library for interacting with the aapanel API",
+    "description": "A comprehensive PHP client library for the aaPanel (BaoTa) API - manage websites, databases, FTP, SSL, files, cron, firewall and more",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "aapanel",
+        "baota",
+        "panel",
+        "api",
+        "server-management",
+        "hosting",
+        "php"
+    ],
+    "homepage": "https://github.com/AzozzALFiras/aapanel-api",
     "require": {
-        "php": "^7.2|^8.0"
+        "php": "^7.2 || ^8.0",
+        "ext-curl": "*",
+        "ext-json": "*"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.0"
+        "phpunit/phpunit": "^8.0 || ^9.0 || ^10.0"
     },
     "authors": [
         {
             "name": "Azozz ALFiras",
-            "email": "azozzalfiras@gmail.com"
+            "email": "3zozz@aevonx.app",
+            "role": "Developer"
         }
     ],
     "autoload": {
@@ -18,12 +33,14 @@
             "AzozzALFiras\\AAPanelAPI\\": "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/AzozzALFiras/aapanel-api"
+    "autoload-dev": {
+        "psr-4": {
+            "AzozzALFiras\\AAPanelAPI\\Tests\\": "tests/"
         }
-    ],
-   "minimum-stability": "stable",
-    "prefer-stable": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    }
 }
