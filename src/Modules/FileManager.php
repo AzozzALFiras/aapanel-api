@@ -2,6 +2,8 @@
 
 namespace AzozzALFiras\AAPanelAPI\Modules;
 
+use AzozzALFiras\AAPanelAPI\Exceptions\AaPanelException;
+
 /**
  * File management operations.
  *
@@ -176,7 +178,7 @@ class FileManager extends AbstractModule
     public function upload(string $localPath, string $remotePath, string $filename): array
     {
         if (!file_exists($localPath)) {
-            throw new \InvalidArgumentException("File not found: {$localPath}");
+            throw new AaPanelException("File not found: {$localPath}");
         }
         return $this->client->postWithFile(
             '/files?action=upload',

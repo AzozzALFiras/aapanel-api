@@ -23,7 +23,7 @@ class HttpClient
 
         $cookieDir = $options['cookie_dir'] ?? sys_get_temp_dir();
         if (!is_dir($cookieDir)) {
-            throw new \InvalidArgumentException("Cookie directory does not exist: {$cookieDir}");
+            throw new Exceptions\AaPanelException("Cookie directory does not exist: {$cookieDir}");
         }
         $this->cookieFile = $cookieDir . '/' . md5($this->baseUrl) . '.cookie';
 

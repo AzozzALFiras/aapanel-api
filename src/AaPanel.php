@@ -15,11 +15,6 @@ use AzozzALFiras\AAPanelAPI\Modules\Websites\PhpSite;
 use AzozzALFiras\AAPanelAPI\Modules\Websites\NodeSite;
 use AzozzALFiras\AAPanelAPI\Modules\Websites\PythonSite;
 use AzozzALFiras\AAPanelAPI\Modules\Websites\ProxySite;
-use AzozzALFiras\AAPanelAPI\Modules\Databases\Mysql;
-use AzozzALFiras\AAPanelAPI\Modules\Databases\PostgreSql;
-use AzozzALFiras\AAPanelAPI\Modules\Databases\MongoDb;
-use AzozzALFiras\AAPanelAPI\Modules\Databases\Redis;
-use AzozzALFiras\AAPanelAPI\Modules\Databases\SqlServer;
 
 /**
  * aaPanel API Client - Main entry point.
@@ -87,10 +82,10 @@ class AaPanel
     public function __construct(string $apiKey, string $baseUrl, array $options = [])
     {
         if ($apiKey === '') {
-            throw new \InvalidArgumentException('API key cannot be empty.');
+            throw new Exceptions\AaPanelException('API key cannot be empty.');
         }
         if ($baseUrl === '') {
-            throw new \InvalidArgumentException('Base URL cannot be empty.');
+            throw new Exceptions\AaPanelException('Base URL cannot be empty.');
         }
         $this->client = new HttpClient($apiKey, $baseUrl, $options);
     }
