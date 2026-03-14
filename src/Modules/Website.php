@@ -2,7 +2,6 @@
 
 namespace AzozzALFiras\AAPanelAPI\Modules;
 
-use AzozzALFiras\AAPanelAPI\HttpClient;
 use AzozzALFiras\AAPanelAPI\Modules\Websites\PhpSite;
 use AzozzALFiras\AAPanelAPI\Modules\Websites\NodeSite;
 use AzozzALFiras\AAPanelAPI\Modules\Websites\PythonSite;

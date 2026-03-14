@@ -39,7 +39,6 @@ class aaPanelApiClient
             $description,
             [],
             $typeId,
-            $type,
             $phpVersion,
             $port,
             $ftp !== null,

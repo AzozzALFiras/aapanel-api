@@ -133,8 +133,14 @@ class Redis extends AbstractModule
         ]);
     }
 
-    // Override trait methods to pass sid
-    public function createBackup(int $sid = 0): array
+    /**
+     * Create Redis backup (RDB snapshot).
+     * API: /database/redis/ToBackup
+     *
+     * @param int $id Unused for Redis, kept for trait compatibility. Pass sid via $sid.
+     * @param int $sid Remote server ID (0 = local)
+     */
+    public function createBackup(int $id = 0, int $sid = 0): array
     {
         return $this->client->post('/database/redis/ToBackup', [
             'sid' => $sid,

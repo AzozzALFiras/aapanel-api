@@ -96,9 +96,9 @@ class Database extends AbstractModule
         return $this->mysql()->setPassword($id, $name, $password);
     }
 
-    public function setAccess(int $id, string $name, string $dataAccess): array
+    public function setAccess(string $name, string $access, bool $ssl = false): array
     {
-        return $this->mysql()->setAccess($name, $dataAccess);
+        return $this->mysql()->setAccess($name, $access, $ssl);
     }
 
     public function getBackups(int $dbId, int $limit = 5, int $page = 1): array

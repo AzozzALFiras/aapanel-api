@@ -29,15 +29,18 @@ class PhpSite extends AbstractModule
      */
     public function getList(int $limit = 20, int $page = 1, ?string $search = null, int $type = -1, string $order = 'id desc'): array
     {
-        return $this->client->post('/data?action=getData', [
+        $data = [
             'table'  => 'sites',
             'limit'  => $limit,
             'p'      => $page,
             'type'   => $type,
             'order'  => $order,
             'tojs'   => 'get_site_list',
-            'search' => $search,
-        ]);
+        ];
+        if ($search !== null) {
+            $data['search'] = $search;
+        }
+        return $this->client->post('/data?action=getData', $data);
     }
 
     /**

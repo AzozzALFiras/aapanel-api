@@ -22,6 +22,9 @@ class HttpClient
         $this->verifySsl = $options['verify_ssl'] ?? false;
 
         $cookieDir = $options['cookie_dir'] ?? sys_get_temp_dir();
+        if (!is_dir($cookieDir)) {
+            throw new \InvalidArgumentException("Cookie directory does not exist: {$cookieDir}");
+        }
         $this->cookieFile = $cookieDir . '/' . md5($this->baseUrl) . '.cookie';
 
         if (!file_exists($this->cookieFile)) {
@@ -80,16 +83,16 @@ class HttpClient
         curl_close($ch);
 
         if ($output === false) {
-            throw new ConnectionException("cURL error: {$error}");
+            throw ConnectionException::fromCurlError($error);
         }
 
         if ($httpCode === 401 || $httpCode === 403) {
-            throw new AuthenticationException("Authentication failed (HTTP {$httpCode}). Check your API key and IP whitelist.");
+            throw AuthenticationException::fromHttpCode($httpCode);
         }
 
         $decoded = json_decode($output, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new ConnectionException("Invalid JSON response: " . json_last_error_msg() . " | Raw: " . substr($output, 0, 500));
+            throw ConnectionException::fromInvalidJson(json_last_error_msg(), $output);
         }
 
         return $decoded;
@@ -97,12 +100,18 @@ class HttpClient
 
     /**
      * Send POST request with file upload.
+     *
+     * @throws ConnectionException
+     * @throws AuthenticationException
      */
     public function postWithFile(string $endpoint, array $data, string $fileField, string $filePath, string $fileName): array
     {
         $url = $this->baseUrl . $endpoint;
         $postData = array_merge($this->generateRequestData(), $data);
-        $postData[$fileField] = new CURLFile($filePath, mime_content_type($filePath), $fileName);
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mimeType = finfo_file($finfo, $filePath);
+        finfo_close($finfo);
+        $postData[$fileField] = new CURLFile($filePath, $mimeType ?: 'application/octet-stream', $fileName);
 
         $ch = curl_init();
         curl_setopt_array($ch, [
@@ -119,16 +128,21 @@ class HttpClient
         ]);
 
         $output = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
         curl_close($ch);
 
         if ($output === false) {
-            throw new ConnectionException("cURL error: {$error}");
+            throw ConnectionException::fromCurlError($error);
+        }
+
+        if ($httpCode === 401 || $httpCode === 403) {
+            throw AuthenticationException::fromHttpCode($httpCode);
         }
 
         $decoded = json_decode($output, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new ConnectionException("Invalid JSON response: " . json_last_error_msg());
+            throw ConnectionException::fromInvalidJson(json_last_error_msg(), $output);
         }
 
         return $decoded;

@@ -86,6 +86,12 @@ class AaPanel
      */
     public function __construct(string $apiKey, string $baseUrl, array $options = [])
     {
+        if ($apiKey === '') {
+            throw new \InvalidArgumentException('API key cannot be empty.');
+        }
+        if ($baseUrl === '') {
+            throw new \InvalidArgumentException('Base URL cannot be empty.');
+        }
         $this->client = new HttpClient($apiKey, $baseUrl, $options);
     }
 

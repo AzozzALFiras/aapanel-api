@@ -175,6 +175,9 @@ class FileManager extends AbstractModule
      */
     public function upload(string $localPath, string $remotePath, string $filename): array
     {
+        if (!file_exists($localPath)) {
+            throw new \InvalidArgumentException("File not found: {$localPath}");
+        }
         return $this->client->postWithFile(
             '/files?action=upload',
             [
